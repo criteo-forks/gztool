@@ -1,0 +1,29 @@
+language: c
+sudo: false
+before_install:
+- sudo apt update
+- sudo apt install -y gcc clang make autoconf automake autotools-dev libtool cmake scons
+  zlib1g-dev
+script:
+- cd ${TRAVIS_BUILD_DIR}
+- aclocal
+- autoreconf --install
+- automake
+- LDFLAGS='-static' ./configure
+- make
+- file gztool
+before_deploy:
+- cd ${TRAVIS_BUILD_DIR}
+- mv gztool gztool-${TRAVIS_TAG#?}
+- echo $(sha256sum gztool-${TRAVIS_TAG#?}) > sha256sums
+- gzip gztool-${TRAVIS_TAG#?}
+deploy:
+  provider: releases
+  api_key:
+    secure: KUVCfGgyJoZoDZth9+bSNSzc/qXU+2rOB9Jax/2/bT+J+vajJasRp9NlDoY+neqfXQCapg8r/XlS/g6SWnbvL2NxVZV7BR5JtW6CXEGf6LKeo2/KNLCuRFZdV7h+5rJ62C0mnbvJAb/U6maby5W483LOa/vgPVhGt7DojE3x8LLoocdEQe0xdSXNz9NMLtAM+0K6fIpSFrpQTLQM9fRtEBXG5OAEgNphKi4BNvKn2Z+qtePtJ99uHgo/Su9cuUdqQlMAYumz2KB/Hn57a58NnbO96mv9yrE2FhXC5QAt4r52LD62uRTqr/Hb77MWGAicxzNKiHq/jkYF+DGE0MvVohUTItyKg4m7Cm9BQg1arsRhWcu7lxaWMkpAE4UleU2Ia/+yiD6xexn6ghkFe3JFCNL2/Z68QtOPynAQaEBv0ar9K4vWIUHvQueNnGNF+QBaN9f1LYqvGQyQIqNqf2DhW2P43QsE8VRLSJlhKbncXc4tb56IuOnF7s7bnZSEY1mEf8jeaL6HX783aKkWtmaIVVbCy9Na4VUtOjC2gkwakSEeI6UDGTgRZL8m7OoyUwUm+hPSaLJC2ZvQH5puqYsQ2JZ3Ln91R0F3MbsavEY9w06WAo5kr0W6mJ22hn1fAL3Fbp4qKHF4DGHx2eZwkMpkLjrPc42P8ojb/nIn0lF9Cew=
+  file:
+    - gztool-${TRAVIS_TAG#?}.gz
+    - sha256sums
+  on:
+    repo: mycroft/gztool
+  skip_cleanup: 'true'
