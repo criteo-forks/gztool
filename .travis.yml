@@ -2,8 +2,7 @@ language: c
 sudo: false
 before_install:
 - sudo apt update
-- sudo apt install -y gcc clang make autoconf automake autotools-dev libtool cmake scons
-  zlib1g-dev
+- sudo apt install -y gcc make autoconf automake autotools-dev libtool zlib1g-dev
 script:
 - cd ${TRAVIS_BUILD_DIR}
 - aclocal
@@ -20,11 +19,11 @@ before_deploy:
 deploy:
   provider: releases
   api_key:
-    secure: KUVCfGgyJoZoDZth9+bSNSzc/qXU+2rOB9Jax/2/bT+J+vajJasRp9NlDoY+neqfXQCapg8r/XlS/g6SWnbvL2NxVZV7BR5JtW6CXEGf6LKeo2/KNLCuRFZdV7h+5rJ62C0mnbvJAb/U6maby5W483LOa/vgPVhGt7DojE3x8LLoocdEQe0xdSXNz9NMLtAM+0K6fIpSFrpQTLQM9fRtEBXG5OAEgNphKi4BNvKn2Z+qtePtJ99uHgo/Su9cuUdqQlMAYumz2KB/Hn57a58NnbO96mv9yrE2FhXC5QAt4r52LD62uRTqr/Hb77MWGAicxzNKiHq/jkYF+DGE0MvVohUTItyKg4m7Cm9BQg1arsRhWcu7lxaWMkpAE4UleU2Ia/+yiD6xexn6ghkFe3JFCNL2/Z68QtOPynAQaEBv0ar9K4vWIUHvQueNnGNF+QBaN9f1LYqvGQyQIqNqf2DhW2P43QsE8VRLSJlhKbncXc4tb56IuOnF7s7bnZSEY1mEf8jeaL6HX783aKkWtmaIVVbCy9Na4VUtOjC2gkwakSEeI6UDGTgRZL8m7OoyUwUm+hPSaLJC2ZvQH5puqYsQ2JZ3Ln91R0F3MbsavEY9w06WAo5kr0W6mJ22hn1fAL3Fbp4qKHF4DGHx2eZwkMpkLjrPc42P8ojb/nIn0lF9Cew=
+    secure: ZFfJ7RPla6QW7AVFXYWQE7ewA/35Xh/+b+1f/Jpc4yOQRoLMMaRNvtVA4b4S28PNpAlIkg8iFI0qMR5TNoW1bnUG0AfKSMcmsaf1DsZcEUJUezug9zSwJr2fu1Wsfs+1IL/kZs6rt11ps5ge1aK2Kg+eBkstonRzyEGup7sY2coUpedYzhDK2NLdFJpmv7yNPKYgTx6NgyTum+TmqQGkHL4A3r1QLbZsucnXnoxBhdu/7YIHG/TOir4YMpz9TEHWYn4d5FAzYB+jzbnwhtP0vS8RT729selhiZj1ln72MxTr+cX3G4y8o16RwklekkGO0yICKOGzgXtkJr25U9mJyMONTT0jWFmmLC+rXfTfOaQPkWnXz1ztQwA2Dwrz/o1HUskR2vxUvxk2EGuNs/9rJ7p4Wr9BT2dAhb9SB8HAXOcGSJfD9zOcewtv7ZK+1dryHQkZlbHEx2jM4OhRgO6DaLO3dUiyshXWlhGpWg+aX47+F1VBKfv3CdUo3VmkD6jaaUXmW8ZHcXCS+3lx6g14R3nFC0vWc7HTGtfq+EyZYELoZC44RyGJiLsD6H++5eFhygA0Yu5r/anMdRYU/KNqELQYdsMYi91vVpOq/GbloghzlR4fj9biA/udUhVgsc2iGevnlpmKOJNpVPOh67rUVUOOiJ3q8DD/j8Wx4OJs6CA=
   file:
     - gztool-${TRAVIS_TAG#?}.gz
     - sha256sums
   on:
-    repo: mycroft/gztool
-    tags : true
+    repo: criteo-forks/gztool
+    tags: true
   skip_cleanup: 'true'
